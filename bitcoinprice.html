@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<style type="text/css">
+  	.mystyle{
+  	border : 1px solid #cacaca;
+    margin-top : 20px;
+}
+  	</style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <script type="text/javascript" src="jquery.js"></script>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container mystyle">
+    	<h3>name :</h3> <input type="text" id="name" placeholder="name">
+      <h3>exp :</h3> <input type="text" id="exp" placeholder="exp">
+      <h3>points :</h3> <input type="text" id="points" placeholder="points">
+      <h3>hp :</h3> <input type="text" id="hp" placeholder="hp">
+      <h3>speed :</h3> <input type="text" id="speed" placeholder="speed">
+      <h3>skill :</h3> <input type="text" id="skill" placeholder="skill">
+      <h3>morale :</h3> <input type="text" id="morale" placeholder="morale">
+    </div>
+    <div class="container">
+    <button class="btn btn-primary mystyle" id="mybtn">Refresh</button>
+</div>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+
+    		var value = 0;
+        var hp,speed,skill,morale,exp,points;
+    		$.ajax({
+	url:"https://axieinfinity.com/api/v2/axies/48133",
+	method: "get",
+	success: function(result){
+		value = result.name;
+    exp = result.exp;
+    points = result.activityPoint;
+    hp = result.stats.hp;
+    speed=result.stats.speed;
+    skill=result.stats.skill;
+    morale=result.stats.morale;
+	},
+	error:function(){
+		console.log("Errrorrr!");
+	}
+});
+
+			$("#mybtn").click(function(){
+    			$("#name").val(value);
+          $("#exp").val(exp);
+          $("#hp").val(hp);
+          $("#speed").val(speed);
+          $("#skill").val(skill);
+          $("#morale").val(morale);
+          $("#points").val(points);
+    		});
+
+
+
+
+    	})
+    </script>
+  </body>
+</html>
